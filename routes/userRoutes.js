@@ -4,7 +4,7 @@ import {
   getBalance,
   loginUser,
 } from "../controllers/userController.js";
-import { protect } from "../middleware/authmiddleware.js";
+import { protect } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
