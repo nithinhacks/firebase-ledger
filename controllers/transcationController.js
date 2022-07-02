@@ -6,6 +6,21 @@ export const makeTransaction = async (req, res) => {
   const nanoid = customAlphabet("1234567890", 10);
   const id = nanoid();
   const { phone, amountToTransfer } = req.body;
+  if (!phone || !amountToTransfer) {
+    return res.status(400).json({
+      message: "Please fill all the fields",
+    });
+  }
+  if (isNaN(amountToTransfer)) {
+    return res.status(400).json({
+      message: "Amount to transfer must be a number",
+    });
+  }
+  if (amountToTransfer <= 0) {
+    return res.status(400).json({
+      message: "Amount to transfer must be greater than 0",
+    });
+  }
   const { cid } = req.user;
   const usersRef = db.collection("users");
   const walletRef = db.collection("wallet_amount");

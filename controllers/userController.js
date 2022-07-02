@@ -14,6 +14,12 @@ export const registerUser = async (req, res) => {
   const { name, phone, country_code, password } = req.body;
   const usersRef = db.collection("users");
 
+  if (!name || !phone || !country_code || !password) {
+    return res.status(400).json({
+      message: "Please fill all the fields",
+    });
+  }
+
   try {
     const userdata = await usersRef.where("phone", "==", phone).get();
 
@@ -45,6 +51,12 @@ export const registerUser = async (req, res) => {
 
 export const loginUser = async (req, res) => {
   const { phone, password } = req.body;
+
+  if (!phone || !password) {
+    return res.status(400).json({
+      message: "Please fill all the fields",
+    });
+  }
   const usersRef = db.collection("users");
   const userdata = await usersRef.where("phone", "==", phone).get();
   let id, passcheck;
