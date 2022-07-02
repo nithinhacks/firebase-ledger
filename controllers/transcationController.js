@@ -2,6 +2,9 @@ import { customAlphabet } from "nanoid";
 import { db } from "../firebaseconfig.js";
 import { Timestamp } from "firebase-admin/firestore";
 
+// @desc    Make Transaction
+// @route   POST /transaction/maketransaction
+// @access  Private
 export const makeTransaction = async (req, res) => {
   const nanoid = customAlphabet("1234567890", 10);
   const id = nanoid();
@@ -79,6 +82,9 @@ export const makeTransaction = async (req, res) => {
   }
 };
 
+// @desc    Get Transaction History
+// @route   GET /transaction/gettransactions
+// @access  Private
 export const getTransaction = async (req, res) => {
   const { cid } = req.user;
   const walletHistoryRef = db.collection("wallet_history").doc(cid);

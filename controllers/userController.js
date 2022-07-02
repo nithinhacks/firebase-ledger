@@ -9,6 +9,9 @@ const generateToken = (id) => {
   });
 };
 
+// @desc    Register User
+// @route   POST /user/register
+// @access  Public
 export const registerUser = async (req, res) => {
   const nanoid = customAlphabet("1234567890abcdefghijklmnopqrstuvwxyz", 10);
   const { name, phone, country_code, password } = req.body;
@@ -49,6 +52,9 @@ export const registerUser = async (req, res) => {
   }
 };
 
+// @desc    Login User
+// @route   POST /user/login
+// @access  Public
 export const loginUser = async (req, res) => {
   const { phone, password } = req.body;
 
@@ -71,6 +77,9 @@ export const loginUser = async (req, res) => {
   }
 };
 
+// @desc    Get balance of user
+// @route   GET /user/getBalance
+// @access  Private
 export const getBalance = async (req, res) => {
   const { cid } = req.user;
   const walletRef = db.collection("wallet_amount");
